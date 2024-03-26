@@ -144,3 +144,97 @@ video{
 .wrapper-right > h2 > em{
     color: #9c9797;
 }
+@media screen and (max-width:800px){
+    .wrapper-left{
+        display: none;
+    }
+    .wrapper-right{
+        width: 100%;
+    }
+}
+#section-account{
+    position: fixed;
+    width: 70%;
+    height: 500px;
+    top: 40px;
+    margin: 0 auto;
+    background: var(--background-dark);
+    z-index: 999;
+    border-radius: calc(var(--border-raduis-primary) /2);
+    box-shadow: 4px 4px 15px rgb(28, 28, 28);
+    display: none;
+}
+.header-account{
+    background: #040404;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    
+}
+.img-close{
+    width: 40px;
+    text-align: right;
+    cursor: pointer;
+    transition: .6s;
+    padding: 10px;
+    border: 1px solid var(--color-pro);
+    border-top-right-radius:calc( var(--border-raduis-primary) /2);
+}
+.img-close:hover{
+    transform: scale(1.1);
+}
+.form-singin{
+    width: 50%;
+}
+.form-login{
+    width: 50%;
+    background: #222;
+    height: 455px;
+    border-bottom-left-radius:calc( var(--border-raduis-primary) /2);
+    padding: 10px;
+    text-align: center;
+}
+.form-login > h1{
+    color: #5CE1E6;
+    text-transform: uppercase;
+    font-size: 30px;
+    padding: 10px 5px;
+}
+.logo{
+    width: 100px;
+}
+.form-login-content{
+    color: white;
+    max-width: 80%;
+    text-align: left;
+    margin: 0 auto;
+}
+.form-login-content > label{
+    font-size: 14px;
+    color: var(--color-light);
+}
+.form-login-content > input{
+    padding: 15px 20px;
+    border-radius: calc(var(--border-raduis-primary)/4);
+    width: 100%;
+    border: none;
+}
+.form-login-content >a{
+    font-size: 12px;
+    color: gray;
+    transition: .5s;
+}
+.form-login-content >a:hover{
+    color: white;
+}
+#about{
+    border: none;
+    border-left: 1px solid var(--color-primary);
+    border-right: 1px solid var(--color-primary);
+}
+#about:hover{
+    border-color: var(--color-light);
+    color: var(--color-secondary);
+    text-shadow: 0 0 10px var(--color-secondary);
+}
