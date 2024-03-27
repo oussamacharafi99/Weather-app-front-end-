@@ -326,7 +326,6 @@ video{
     width: 90%;
     height: 550px;
     margin: 25px auto;
-    border: 1px solid red;
     border-radius: calc(var(--border-raduis-primary) /2);
 }
 .section-header-weather{
@@ -334,6 +333,7 @@ video{
     color: var(--color-light);
     display: flex;
     align-items: center;
+    padding: 10px;
 }
 .section-header-left{
     display: flex;
@@ -342,25 +342,76 @@ video{
 }
 .icons{
     display: flex;
+    width: 20%;
+    justify-content: space-between;
 }
 .icons > h1{
     width: 40px;
     height: 40px;
     padding: 5px;
-    background :#222;
+    background :#2f2f2f;
     border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 4px 4px 10px rgb(0, 0, 0);
 }
 .city-name{
     display: flex;
-    padding: 5px;
+    padding: 5px 10px;
     align-items: center;
-    border: 0.5px solid var(--color-pro);
-    border-radius: calc(var());
+    background: #2f2f2f;
+    border-radius: calc(var(--border-raduis-primary) /2);
+    box-shadow: 4px 4px 10px rgb(0, 0, 0);
 }
 .city-name >h1{
     font-size: 13px;
     font-weight: 500;
+}
+.city-name >h1> span{
+    color: #9c9797;
+    font-weight: 300;
+}
+#icon-position{
+    padding-right: 7px;
+}
+.section-header-right{
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    padding: 0px 30px;
+    align-items: center;
+}
+#profile{
+    width: 50px;
+    display: flex;
+    align-items: center;
+}
+#profile > img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    box-shadow: 4px 4px 10px rgb(0, 0, 0);
+}
+.city-search{
+    display: flex;
+    align-items: center;
+    background: #2f2f2f;
+    padding: 2px 20px;
+    border-radius: calc(var(--border-raduis-primary) /2);
+    box-shadow: 4px 4px 10px rgb(0, 0, 0);
+}
+.city-search > button{
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    
+}
+.city-search >input {
+    padding: 8px 20px;
+    background: #2f2f2f;
+    outline: none;
+    border: none;
+    color: var(--color-light);
 }
