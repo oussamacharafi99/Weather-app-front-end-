@@ -37,8 +37,10 @@ function change(){
 const apiKey = 'b4865ee9d796cdba2a29ff974402d665';
 let lat = null;
 let lon = null;
+let dataCity = [];
 
 const namecity = "agadir";
+
 const apiUrlName = `http://api.openweathermap.org/geo/1.0/direct?q=${namecity}&limit=5&appid=${apiKey}`;
 
 fetch(apiUrlName)
@@ -55,7 +57,10 @@ fetch(apiUrl)
         .then(response => {
           return response.json();
         }).then(weatherData => {
-          console.log(weatherData);
+          
+             dataCity = weatherData;
+          
+
         }).catch(error => {
           console.error('ُerror in return data:', error);
         });
@@ -66,10 +71,9 @@ fetch(apiUrl)
     console.error('error in search of city;', error);
   });
 
-
-
-  
-
+  setTimeout(function(){
+    console.log(dataCity);
+ },1000)
 // const apiKey = 'b4865ee9d796cdba2a29ff974402d665'; 
 // let lat = null; 
 // let lon = null;
