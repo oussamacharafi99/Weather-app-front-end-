@@ -313,3 +313,54 @@ video{
 #text{
     color: grey;
 }
+#section-wrapper-weather{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #6f6f6f81;
+    backdrop-filter: blur(20px);
+    z-index: 999;
+}
+.section-weather{
+    width: 90%;
+    height: 550px;
+    margin: 25px auto;
+    border: 1px solid red;
+    border-radius: calc(var(--border-raduis-primary) /2);
+}
+.section-header-weather{
+    background: var(--background-dark);
+    color: var(--color-light);
+    display: flex;
+    align-items: center;
+}
+.section-header-left{
+    display: flex;
+    width: 40%;
+    justify-content: space-around;
+}
+.icons{
+    display: flex;
+}
+.icons > h1{
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    background :#222;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.city-name{
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    border: 0.5px solid var(--color-pro);
+    border-radius: calc(var());
+}
+.city-name >h1{
+    font-size: 13px;
+    font-weight: 500;
+}
