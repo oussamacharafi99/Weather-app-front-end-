@@ -109,10 +109,14 @@ async function tenCities(){
     const data = await getCities(lat , lon);
     console.log(data);
      getCard(data)
-  }
+}
 }
 tenCities();
 
+  function getIcon(data){
+    return "/3d weather icons/sun/13.png";
+
+}
 async function getCard(data){
   document.querySelector(".section-wrapper-all").innerHTML +=
   `
@@ -123,7 +127,7 @@ async function getCard(data){
                                 <h4>${data.weather[0].main}</h4>
                             </div>
                             <div class="card-icon">
-                                <img src="/3d weather icons/sun/13.png" width="60px" alt="">
+                                <img src="${getIcon(data)}" width="60px" alt="">
                                 <p>${(data.main.temp - 273.15).toFixed(2)+ " °"}</p>
                             </div>
                         </div>
