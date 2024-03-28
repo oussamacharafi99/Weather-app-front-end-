@@ -49,13 +49,13 @@ const cities = [
 const apiKey = 'b4865ee9d796cdba2a29ff974402d665';
 let lat = null;
 let lon = null;
-let dataCity = [];
-let ar = [];
-const namecity = "agadir";
+
 
 function one(){
+  const namecity = document.getElementById("search").value.trim();
+
   const apiUrlName = `http://api.openweathermap.org/geo/1.0/direct?q=${namecity}&limit=5&appid=${apiKey}`;
-fetch(apiUrlName)
+   fetch(apiUrlName)
   .then(res => {
     return res.json();
   }).then(data => {
@@ -69,9 +69,8 @@ fetch(apiUrl)
         .then(response => {
           return response.json();
         }).then(weatherData => {
-             dataCity = weatherData;
-             console.log(dataCity);
-
+          showCity(weatherData)
+             
         }).catch(error => {
           console.error('ُerror in return data:', error);
         });
@@ -86,7 +85,10 @@ fetch(apiUrl)
     console.log(dataCity);
  },1000)
 }
-// one();
+
+function showCity(weatherData){
+  
+}
 
 // this scetion for get 10 cities //
 async function getLonLat(name){
