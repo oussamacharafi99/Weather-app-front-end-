@@ -408,7 +408,7 @@ video{
     border: none;
     display: flex;
     align-items: center;
-    
+    cursor: pointer;
 }
 .city-search >input {
     padding: 8px 20px;
@@ -458,10 +458,10 @@ video{
 }
 .card{
     margin: 5px auto;
-    width: 80%;
-    height: 100px;
+    width: 85%;
+    height: 110px;
     background: #2f2f2f;
-    border-radius: calc(var(--border-raduis-primary) /2);
+    border-radius: calc(var(--border-raduis-primary) /1.5);
     box-shadow: 4px 4px 10px rgb(0, 0, 0);
     display: flex;
     padding: 8px 15px;

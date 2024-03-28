@@ -124,7 +124,7 @@ async function getCard(data){
                             </div>
                             <div class="card-icon">
                                 <img src="/3d weather icons/sun/13.png" width="60px" alt="">
-                                <p>${(data.main.temp - 273.15).toFixed(2)}</p>
+                                <p>${(data.main.temp - 273.15).toFixed(2)+ " °"}</p>
                             </div>
                         </div>
   `
