@@ -104,7 +104,7 @@
                 </div>
                 <div class="section-header-right">
                     <div class="city-search">
-                        <button><img src="/icons/search.png" width="20px"></button>
+                        <button id="btn-search" onclick="one()"><img src="/icons/search.png" width="20px"></button>
                         <input type="text"  id="search" placeholder="Search city...">
                     </div>
                     <h2 id="profile"><img src="/images/40 Handsome Black Men Haircuts and Hairstyles to Rock in 2024.jpg" alt=""></h2>
@@ -113,20 +113,20 @@
             <div class="section-body-weather">
                 <div class="section-show-city-map">
                     <div class="section-show-city">
-                        <div class="card-city">   
-                        </div>
-                        <div class="card-future">  
-                        </div>
-                        <div class="card-future">  
-                        </div>
-                        <div class="card-future">  
-                        </div>
-                        <div class="card-future">  
+                        <div class="card-city">  
+                            <div class="header-card-city">
+                                <h2 id="day">Monday</h2>
+                                <h2 id="time">12:30</h2>
+                            </div>
+                            <div class="body-card-city">
+                                <h1>20,56°</h1>
+                                <img src="/3d weather icons/sun/8.png" width="50px" alt="">
+                            </div>
                         </div>
                         <div class="card-future">  
                         </div>
                     </div>
-                    <div class="section-show-map">
+                    <div class="section-show-map" id="maps">
 
                     </div>
                 </div>
