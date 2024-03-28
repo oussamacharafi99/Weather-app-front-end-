@@ -114,7 +114,18 @@ async function tenCities(){
 tenCities();
 
   function getIcon(data){
-    return "/3d weather icons/sun/13.png";
+    if(data.weather[0].main === "Clouds"){
+      return "/3d weather icons/sun/cloud.png";
+    }
+    else if(data.weather[0].main === "Rain"){
+      return "/3d weather icons/sun/rain.png";
+    }
+    else if(data.weather[0].main === "Snow"){
+      return "/3d weather icons/sun/snow.png";
+    }
+    else if(data.weather[0].main === "Clear"){
+      return "/3d weather icons/sun/clear.png";
+    }
 
 }
 async function getCard(data){
