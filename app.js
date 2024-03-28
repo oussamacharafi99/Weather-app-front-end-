@@ -50,6 +50,7 @@ const apiKey = 'b4865ee9d796cdba2a29ff974402d665';
 let lat = null;
 let lon = null;
 let dataCity = [];
+let ar = [];
 const namecity = "agadir";
 
 function one(){
@@ -99,19 +100,33 @@ async function getLonLat(name){
 async function getCities(lat , lon){
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;    
   const response = await fetch(apiUrl);
-      return response.json();
+  const data = response.json();
+  return data;
 }
 async function tenCities(){
   for(const name of cities){
     const {lat , lon} = await getLonLat(name);
     const data = await getCities(lat , lon);
-    showAll(data);
+    console.log(data);
+     getCard(data)
   }
 }
-function showAll(data){
-  console.log(data);
-}
 tenCities();
-////
 
+async function getCard(data){
+  document.querySelector(".section-wrapper-all").innerHTML +=
+  `
+                          <div class="card">
+                            <div class="card-text">
+                                <p>${data.sys.country}</p>
+                                <h3>${data.name}</h3>
+                                <h4>${data.weather[0].main}</h4>
+                            </div>
+                            <div class="card-icon">
+                                <img src="/3d weather icons/sun/13.png" width="60px" alt="">
+                                <p>${(data.main.temp - 273.15).toFixed(2)}</p>
+                            </div>
+                        </div>
+  `
+}
 
