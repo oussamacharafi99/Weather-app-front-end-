@@ -490,3 +490,12 @@ video{
     font-weight: 800;
     color: var(--color-light);
 }
+::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+    background-color: #F5F5F5;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #2f2f2f;
+  }

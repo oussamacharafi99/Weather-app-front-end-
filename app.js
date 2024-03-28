@@ -44,7 +44,7 @@ const cities = [
   "Sydney", 
   "Moscow", 
   "Los Angeles", 
-  "Dubai"
+  "Beni Mellal"
 ];
 const apiKey = 'b4865ee9d796cdba2a29ff974402d665';
 let lat = null;
