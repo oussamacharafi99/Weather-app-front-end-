@@ -330,6 +330,7 @@ video{
     background: #ffffff2d;
     backdrop-filter: blur(20px);
     z-index: 999;
+    display: none;
 }
 .section-weather{
     width: 85%;
@@ -533,11 +534,29 @@ video{
     background: #2f2f2f;
     border-radius: calc(var(--border-raduis-primary)/2);
     box-shadow: 4px 4px 10px rgb(0, 0, 0);
+    text-align: center;
+}
+.jour{
+    text-align: center;
+    padding: 8px;
+}
+.jour > h1 {
+    color: white;
+    text-shadow: 4px 4px 5px black;
+}
+.icon-jour{
+    padding: 10px 0;
+    width: 50px;
+    margin: 0 auto;
+}
+.card-future > h3 {
+    font-size: 30px;
+    color: var(--color-light);
+    text-shadow: 4px 4px 5px black;
 }
 .section-show-map{
     width: 100%;
     height: 48%;
-    background: green;
 }
 .header-card-city{
     display: flex;
@@ -556,7 +575,7 @@ video{
     color: var(--color-light);
 }
 #time{
-    font-size: 20px;
+    font-size: 10px;
     color: var(--color-light);
 }
 .body-card-city{
