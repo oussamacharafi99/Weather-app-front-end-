@@ -571,3 +571,18 @@ video{
     color: #222;
     text-shadow: 4px 4px 5px rgb(95, 95, 95);
 }
+.footer-card-city{
+    display: flex;
+    padding: 15px 8px;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer-card-city > h3 > span, div > h3>span{
+    font-size: 10px;
+    color: var(--color-light);
+    text-shadow: 4px 4px 5px black;
+}
+.footer-card-city > h3, div > h3{
+    font-size: 12px;
+    color: #222;
+}

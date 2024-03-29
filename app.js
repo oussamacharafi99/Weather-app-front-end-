@@ -68,8 +68,8 @@ const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=$
 fetch(apiUrl)
         .then(response => {
           return response.json();
-        }).then(weatherData => {
-          showCity(weatherData)
+        }).then(data => {
+          showCity(data)
              
         }).catch(error => {
           console.error('ُerror in return data:', error);
@@ -86,7 +86,30 @@ fetch(apiUrl)
  },1000)
 }
 
-function showCity(weatherData){
+function showCity(data){
+  const dt = timee(data);
+  console.log(dt);
+    document.getElementById("card-city").innerHTML = 
+    `
+                            <div class="header-card-city">
+                                <h2 id="day">Monday</h2>
+                                <h2 id="time">12:30</h2>
+                            </div>
+                            <div class="body-card-city">
+                                <h1>20,56°</h1>
+                                <img src="/3d weather icons/sun/8.png" width="50px" alt="">
+                            </div>
+                            <div class="footer-card-city">
+                                <div>
+                                    <h3>speed : <span id="speed">12km</span></h3>
+                                    <h3>humidity : <span id="speed">51%</span></h3>
+                                </div>
+                                <div>
+                                    <h3>sunrise : <span id="speed">12 km</span></h3>
+                                    <h3>sunset : <span id="speed">12 km</span></h3>
+                                </div>
+                            </div>
+    `
   
 }
 
@@ -146,4 +169,24 @@ async function getCard(data){
                         </div>
   `
 }
+function timee(data){
+  const sysData = {country: data.country, sunrise: data.sys.sunrise, sunset: data.sys.sunset};
 
+// تحويل وقت الشروق من UNIX timestamp إلى تنسيق قابل للقراءة
+const sunriseDate = new Date(sysData.sunrise * 1000); // ضرب بـ 1000 لتحويله إلى ميلي ثانية
+const sunriseTimeString = sunriseDate.toLocaleTimeString();
+const sunriseDateString = sunriseDate.toLocaleDateString(undefined, { weekday: 'long' });
+
+// تحويل وقت الغروب من UNIX timestamp إلى تنسيق قابل للقراءة
+const sunsetDate = new Date(sysData.sunset * 1000); // ضرب بـ 1000 لتحويله إلى ميلي ثانية
+const sunsetTimeString = sunsetDate.toLocaleTimeString();
+const sunsetDateString = sunsetDate.toLocaleDateString(undefined, { weekday: 'long' });
+
+const allDate ={
+  sunriseTime : sunriseTimeString,
+  sunriseDateS :sunriseDateString,
+  sunsetTime : sunsetTimeString,
+  sunsetDate : sunsetDateString
+}
+    return allDate;
+}
