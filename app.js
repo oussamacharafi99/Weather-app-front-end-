@@ -68,8 +68,8 @@ const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=$
 fetch(apiUrl)
         .then(response => {
           return response.json();
-        }).then(data => {
-          showCity(data)
+        }).then(dataWeather => {
+          showCity(dataWeather)
              
         }).catch(error => {
           console.error('ُerror in return data:', error);
@@ -80,33 +80,34 @@ fetch(apiUrl)
   }).catch(error => {
     console.error('error in search of city;', error);
   });
-
-  setTimeout(function(){
-    console.log(dataCity);
- },1000)
 }
 
-function showCity(data){
-  const dt = timee(data);
-  console.log(dt);
+ function showCity(dataWeather){
+  const data = dataWeather;
+  const dt = timee(dataWeather);
+    document.getElementById("city-name").innerHTML =
+    `
+         <h3 id="icon-position"><img src="icons/location-sign.png" width="16px"></h3>
+        <h1>${dataWeather.name},<span> ${dataWeather.sys.country}</span></h1>
+    `;
     document.getElementById("card-city").innerHTML = 
     `
                             <div class="header-card-city">
-                                <h2 id="day">Monday</h2>
-                                <h2 id="time">12:30</h2>
+                                <h2 id="day">${dt.sunriseDateS}</h2>
+                                <h2 id="time">${dt.sunsetDate}</h2>
                             </div>
                             <div class="body-card-city">
-                                <h1>20,56°</h1>
-                                <img src="/3d weather icons/sun/8.png" width="50px" alt="">
+                                <h1>${(dataWeather.main.temp - 273.15).toFixed(2)}°</h1>
+                                <img src="${getIcon(data)}" width="50px" alt="">
                             </div>
                             <div class="footer-card-city">
                                 <div>
-                                    <h3>speed : <span id="speed">12km</span></h3>
-                                    <h3>humidity : <span id="speed">51%</span></h3>
+                                    <h3>speed : <span >${dataWeather.wind.speed}km</span></h3>
+                                    <h3>humidity : <span >${dataWeather.main.humidity}%</span></h3>
                                 </div>
                                 <div>
-                                    <h3>sunrise : <span id="speed">12 km</span></h3>
-                                    <h3>sunset : <span id="speed">12 km</span></h3>
+                                    <h3>sunrise : <span id="speed">${dt.sunriseTime}</span></h3>
+                                    <h3>sunset : <span id="speed">${dt.sunsetTime}</span></h3>
                                 </div>
                             </div>
     `
@@ -132,8 +133,8 @@ async function tenCities(){
   for(const name of cities){
     const {lat , lon} = await getLonLat(name);
     const data = await getCities(lat , lon);
-    console.log(data);
      getCard(data)
+     console.log(data);
 }
 }
 tenCities();
@@ -169,18 +170,17 @@ async function getCard(data){
                         </div>
   `
 }
-function timee(data){
-  const sysData = {country: data.country, sunrise: data.sys.sunrise, sunset: data.sys.sunset};
 
-// تحويل وقت الشروق من UNIX timestamp إلى تنسيق قابل للقراءة
-const sunriseDate = new Date(sysData.sunrise * 1000); // ضرب بـ 1000 لتحويله إلى ميلي ثانية
+function timee(dataWeather){
+const sysData = {country: dataWeather.country, sunrise: dataWeather.sys.sunrise, sunset: dataWeather.sys.sunset};
+
+const sunriseDate = new Date(sysData.sunrise * 1000); 
 const sunriseTimeString = sunriseDate.toLocaleTimeString();
 const sunriseDateString = sunriseDate.toLocaleDateString(undefined, { weekday: 'long' });
 
-// تحويل وقت الغروب من UNIX timestamp إلى تنسيق قابل للقراءة
-const sunsetDate = new Date(sysData.sunset * 1000); // ضرب بـ 1000 لتحويله إلى ميلي ثانية
+const sunsetDate = new Date(sysData.sunset * 1000); 
 const sunsetTimeString = sunsetDate.toLocaleTimeString();
-const sunsetDateString = sunsetDate.toLocaleDateString(undefined, { weekday: 'long' });
+const sunsetDateString = sunsetDate.toLocaleDateString();
 
 const allDate ={
   sunriseTime : sunriseTimeString,
@@ -189,4 +189,29 @@ const allDate ={
   sunsetDate : sunsetDateString
 }
     return allDate;
+}
+
+
+
+/// login section ///
+
+let Uname = document.getElementById("c-username");
+let email = document.getElementById("c-email");
+let password = document.getElementById("c-userpassword");
+
+const acountT = [];
+
+document.getElementById("singin").addEventListener("click",()=>{
+  createAcount();
+})
+
+function createAcount(){
+  const acount ={
+    full_name : Uname.value,
+    email :email.value, 
+    password : password.value
+  }
+
+  acountT.push(acount);
+  console.log(acountT);
 }
