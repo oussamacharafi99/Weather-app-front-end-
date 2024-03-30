@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+        
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    
     <title>CO-Weather</title>
 </head>
 <body>
@@ -53,7 +61,7 @@
                     <a href="#">Forgot Password ?</a>
                 </div><br>
                 <div class="buttons">
-                    <button id="login" class="login">Log in</button>
+                    <button id="login" class="login" onclick="login()">Log in</button>
                 </div>
     
             </div>
@@ -70,7 +78,7 @@
                     <input type="password" id="c-userpassword"  placeholder="Password">
                 </div><br>
                 <div class="buttons">
-                    <button id="singin">Create</button>
+                    <button id="singin" class="create">Create</button>
                 </div>
             </div>
 
@@ -175,7 +183,7 @@
                         </div>
                     </div>
                     <div class="section-show-map" id="maps">
-
+                        <div id="map"></div>
                     </div>
                 </div>
                 <div class="section-show-all">
