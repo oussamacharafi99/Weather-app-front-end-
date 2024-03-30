@@ -49,7 +49,7 @@ const cities = [
 const apiKey = 'b4865ee9d796cdba2a29ff974402d665';
 let lat = null;
 let lon = null;
-
+let checked = false;
 
 function one(){
   const namecity = document.getElementById("search").value.trim();
@@ -70,6 +70,11 @@ fetch(apiUrl)
           return response.json();
         }).then(dataWeather => {
           showCity(dataWeather)
+          let latC = dataWeather.coord.lat;
+          let lonC = dataWeather.coord.lon;
+          console.log(latC , lonC);
+          checked = true;
+          getMap(latC , lonC)
              
         }).catch(error => {
           console.error('ُerror in return data:', error);
@@ -111,7 +116,6 @@ fetch(apiUrl)
                                 </div>
                             </div>
     `
-  
 }
 
 // this scetion for get 10 cities //
@@ -193,26 +197,60 @@ const allDate ={
 
 
 
-/// login section ///
+/// create account section ///
 
-let Uname = document.getElementById("c-username");
-let email = document.getElementById("c-email");
-let password = document.getElementById("c-userpassword");
+let c_Uname = document.getElementById("c-username");
+let Email = document.getElementById("c-email");
+let c_password = document.getElementById("c-userpassword");
 
 const acountT = [];
 
-document.getElementById("singin").addEventListener("click",()=>{
+document.querySelector(".create").addEventListener("click",()=>{
   createAcount();
 })
 
 function createAcount(){
   const acount ={
-    full_name : Uname.value,
-    email :email.value, 
-    password : password.value
+    full_name : c_Uname.value.trim(),
+    email :Email.value.trim(), 
+    password : c_password.value.trim()
   }
 
   acountT.push(acount);
   console.log(acountT);
 }
+/////// login section
+const userName = document.getElementById("username");
+const password = document.getElementById("userpassword");
 
+function login(){
+  for(let i = 0 ; i < acountT.length; i++){
+    if(userName.value.trim() == acountT[i].full_name 
+      || userName.value.trim() == acountT[i].email 
+      && password.value.trim() == acountT[i].password)
+      {
+        console.log("the account good !");
+      }
+      else{
+        console.log("enter the correct password or email");
+      }
+
+  }
+  
+}
+
+
+function getMap(latC , lonC){
+  if(checked == false){
+    var map = L.map('map').setView([51.505, -0.09], 13);
+  }
+  else{
+    var map = L.map('map').setView([latC, lonC], 13);
+  }
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+}
