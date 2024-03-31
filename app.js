@@ -1,3 +1,15 @@
+function switching(){
+  let switch_log =document.getElementById("switch-login");
+  document.getElementById("gif").src ="videos/gif2.gif"
+          document.getElementById("text").innerHTML = "if you need account !, click in Create"
+          switch_log.style.transition = "0.8s"
+          switch_log.style.transform = "translateX(100%)"
+          switch_log.style.background = "#0a0a0a"
+          switch_log.style.borderRadius = "0px"
+          switch_log.style.borderTopRightRadius = "25px"
+          switch_log.style.borderBottomRightRadius = "25px"
+          document.querySelector(".sing").innerHTML = "Create";
+}
 
 
 function change(){
@@ -11,15 +23,7 @@ function change(){
 
   document.querySelector(".sing").addEventListener('click',function(){
       if(checked === true){
-          document.getElementById("gif").src ="videos/gif2.gif"
-          document.getElementById("text").innerHTML = "if you need account !, click in Create"
-          switch_log.style.transition = "0.8s"
-          switch_log.style.transform = "translateX(100%)"
-          switch_log.style.background = "#0a0a0a"
-          switch_log.style.borderRadius = "0px"
-          switch_log.style.borderTopRightRadius = "25px"
-          switch_log.style.borderBottomRightRadius = "25px"
-          this.innerHTML = "Create";
+          switching();
           checked = false;
       }else{
           document.getElementById("text").innerHTML = "if you have account !, click in Login"
@@ -51,7 +55,7 @@ const cities = [
 const apiKey = 'b4865ee9d796cdba2a29ff974402d665';
 let lat = null;
 let lon = null;
-let checked = false;
+let check = false;
 
 function one(){
   const namecity = document.getElementById("search").value.trim();
@@ -75,7 +79,7 @@ fetch(apiUrl)
           let latC = dataWeather.coord.lat;
           let lonC = dataWeather.coord.lon;
           console.log(latC , lonC);
-          checked = true;
+          check = true;
           
             getMap(latC , lonC)
              
@@ -87,6 +91,7 @@ fetch(apiUrl)
     }
   }).catch(error => {
     console.error('error in search of city;', error);
+    alert("this city not find")
   });
 }
 
@@ -198,55 +203,13 @@ const allDate ={
 }
 
 
-
-// Create account section
-document.querySelector(".create").addEventListener("click", () => {
-  createAccount();
-  progressBar();
-});
-
-const acountT = []; 
-
-function createAccount() {
-  const c_Uname = document.getElementById("c-username").value.trim().toUpperCase();
-  const Email = document.getElementById("c-email").value.trim().toUpperCase();
-  const c_password = document.getElementById("c-userpassword").value.trim().toUpperCase();
-
-  const account = {
-    full_name: c_Uname,
-    email: Email,
-    password: c_password
-  };
-
-  acountT.push(account);
-  localStorage.setItem("userData", JSON.stringify(acountT));
-}
-
-// Login section
-function login() {
-  const userName = document.getElementById("username").value.trim().toUpperCase();
-  const userPassword = document.getElementById("userpassword").value.trim().toUpperCase();
-
-  const storedAccounts = JSON.parse(localStorage.getItem("userData")) || [];
-
-  for (let i = 0; i < storedAccounts.length; i++) {
-    if ((userName === storedAccounts[i].full_name || userName === storedAccounts[i].email) &&
-        userPassword === storedAccounts[i].password) {
-      console.log("The account is good !");
-      return; 
-    }
-  }
-
-  console.log("Enter the correct password or email");
-}
-
 let map; 
 function getMap(latC, lonC) {
   if (map) {
     map.remove();
   }
 
-  if (!checked) {
+  if (!check) {
     map = L.map('map').setView([47.6038 , -122.3301], 13);
   } else {
     map = L.map('map').setView([latC, lonC], 13);
@@ -261,12 +224,63 @@ getMap();
 
 
 
+// Create account section
+document.querySelector(".create").addEventListener("click", () => {
+  createAccount();
+});
+
+const acountT = []; 
+function createAccount() {
+  const c_Uname = document.getElementById("c-username").value.trim().toUpperCase();
+  const Email = document.getElementById("c-email").value.trim().toUpperCase();
+  const c_password = document.getElementById("c-userpassword").value.trim().toUpperCase();
+
+  if(c_Uname == "" || Email == "" || c_password == ""){
+    alert("Please fill out all fields")
+  }
+  else{
+    const account = {
+      full_name: c_Uname,
+      email: Email,
+      password: c_password
+    };
+  
+    acountT.push(account);
+    localStorage.setItem("userData", JSON.stringify(acountT));
+    progressBar();
+    switching();
+  }
+}
+
+// Login section
+function login() {
+  const userName = document.getElementById("username").value.trim().toUpperCase();
+  const userPassword = document.getElementById("userpassword").value.trim().toUpperCase();
+
+  const storedAccounts = JSON.parse(localStorage.getItem("userData")) || [];
+
+  for (let i = 0; i < storedAccounts.length; i++) {
+    if ((userName === storedAccounts[i].full_name || userName === storedAccounts[i].email) &&
+        userPassword === storedAccounts[i].password) {
+      alert("The account is good !");
+      document.getElementById("section-wrapper-account").style.transition = "0.9s"
+      document.getElementById("section-wrapper-account").style.transform = "translateX(1400px)"
+      setTimeout(()=>{
+        document.getElementById("section-wrapper-account").style.display = "none"
+        document.getElementById("section-wrapper-weather").style.display = "flex"
+      },700)
+      return; 
+    }
+  }
+  alert("Enter the correct password or email")
+}
+
 function progressBar() {
   document.querySelector(".alert").style.display = "flex"
   let con = 0;
   let prog = document.getElementById("prog");
   const setT = setInterval(() => {
-    con += 1;
+    con += 10;
     prog.style.width = con + "%"
     prog.style.transition = ".8s"
 

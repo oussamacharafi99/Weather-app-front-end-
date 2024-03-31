@@ -1,4 +1,5 @@
 # Weather-app-front-end-
+# copyright by oussama charafi ----> enaa school
 Contexte du projet
 En tant que développeur front-end freelancer votre client est une entreprise de développement d'applications météo qui cherche à créer une application de prévisions météorologiques en utilisant une API externe. L'objectif est de fournir une plateforme complète pour consulter les prévisions météorologiques en temps réel et offrir une expérience utilisateur optimale.
 
