@@ -330,7 +330,6 @@ video{
     background: #ffffff2d;
     backdrop-filter: blur(20px);
     z-index: 999;
-
 }
 .section-weather{
     width: 85%;
@@ -547,7 +546,10 @@ video{
 .icon-jour{
     padding: 10px 0;
     width: 50px;
+    height: 80px;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
 }
 .card-future > h3 {
     font-size: 30px;
