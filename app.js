@@ -35,6 +35,7 @@ function change(){
 }
 const ArryOfCreateAccount =[];
 const cities = [
+  "Beni Mellal",
   "New York",
   "Paris",
   "London",
@@ -43,8 +44,7 @@ const cities = [
   "Rome", 
   "Sydney", 
   "Moscow", 
-  "Los Angeles", 
-  "Beni Mellal"
+  "Los Angeles"
 ];
 const apiKey = 'b4865ee9d796cdba2a29ff974402d665';
 let lat = null;
@@ -74,7 +74,8 @@ fetch(apiUrl)
           let lonC = dataWeather.coord.lon;
           console.log(latC , lonC);
           checked = true;
-          getMap(latC , lonC)
+          
+            getMap(latC , lonC)
              
         }).catch(error => {
           console.error('ُerror in return data:', error);
@@ -107,8 +108,8 @@ fetch(apiUrl)
                             </div>
                             <div class="footer-card-city">
                                 <div>
-                                    <h3>speed : <span >${dataWeather.wind.speed}km</span></h3>
-                                    <h3>humidity : <span >${dataWeather.main.humidity}%</span></h3>
+                                    <h3>sp : <span >${dataWeather.wind.speed}km</span></h3>
+                                    <h3>hum : <span >${dataWeather.main.humidity}%</span></h3>
                                 </div>
                                 <div>
                                     <h3>sunrise : <span id="speed">${dt.sunriseTime}</span></h3>
@@ -138,7 +139,6 @@ async function tenCities(){
     const {lat , lon} = await getLonLat(name);
     const data = await getCities(lat , lon);
      getCard(data)
-     console.log(data);
 }
 }
 tenCities();
@@ -178,7 +178,7 @@ async function getCard(data){
 function timee(dataWeather){
 const sysData = {country: dataWeather.country, sunrise: dataWeather.sys.sunrise, sunset: dataWeather.sys.sunset};
 
-const sunriseDate = new Date(sysData.sunrise * 1000); 
+const sunriseDate = new Date(sysData.sunrise * 1000 ); 
 const sunriseTimeString = sunriseDate.toLocaleTimeString();
 const sunriseDateString = sunriseDate.toLocaleDateString(undefined, { weekday: 'long' });
 
@@ -197,60 +197,61 @@ const allDate ={
 
 
 
-/// create account section ///
+// Create account section
+document.querySelector(".create").addEventListener("click", () => {
+  createAccount();
+});
 
-let c_Uname = document.getElementById("c-username");
-let Email = document.getElementById("c-email");
-let c_password = document.getElementById("c-userpassword");
+const acountT = []; 
 
-const acountT = [];
+function createAccount() {
+  const c_Uname = document.getElementById("c-username").value.trim().toUpperCase();
+  const Email = document.getElementById("c-email").value.trim().toUpperCase();
+  const c_password = document.getElementById("c-userpassword").value.trim().toUpperCase();
 
-document.querySelector(".create").addEventListener("click",()=>{
-  createAcount();
-})
+  const account = {
+    full_name: c_Uname,
+    email: Email,
+    password: c_password
+  };
 
-function createAcount(){
-  const acount ={
-    full_name : c_Uname.value.trim(),
-    email :Email.value.trim(), 
-    password : c_password.value.trim()
-  }
-
-  acountT.push(acount);
-  console.log(acountT);
-}
-/////// login section
-const userName = document.getElementById("username");
-const password = document.getElementById("userpassword");
-
-function login(){
-  for(let i = 0 ; i < acountT.length; i++){
-    if(userName.value.trim() == acountT[i].full_name 
-      || userName.value.trim() == acountT[i].email 
-      && password.value.trim() == acountT[i].password)
-      {
-        console.log("the account good !");
-      }
-      else{
-        console.log("enter the correct password or email");
-      }
-
-  }
-  
+  acountT.push(account);
+  localStorage.setItem("userData", JSON.stringify(acountT));
 }
 
+// Login section
+function login() {
+  const userName = document.getElementById("username").value.trim().toUpperCase();
+  const userPassword = document.getElementById("userpassword").value.trim().toUpperCase();
 
-function getMap(latC , lonC){
-  if(checked == false){
-    var map = L.map('map').setView([51.505, -0.09], 13);
+  const storedAccounts = JSON.parse(localStorage.getItem("userData")) || [];
+
+  for (let i = 0; i < storedAccounts.length; i++) {
+    if ((userName === storedAccounts[i].full_name || userName === storedAccounts[i].email) &&
+        userPassword === storedAccounts[i].password) {
+      console.log("The account is good !");
+      return; 
+    }
   }
-  else{
-    var map = L.map('map').setView([latC, lonC], 13);
+
+  console.log("Enter the correct password or email");
+}
+
+let map; 
+function getMap(latC, lonC) {
+  if (map) {
+    map.remove();
+  }
+
+  if (!checked) {
+    map = L.map('map').setView([47.6038 , -122.3301], 13);
+  } else {
+    map = L.map('map').setView([latC, lonC], 13);
   }
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
-
 }
+getMap();
