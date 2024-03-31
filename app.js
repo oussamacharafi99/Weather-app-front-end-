@@ -1,3 +1,5 @@
+
+
 function change(){
   document.getElementById("section-wrapper-account").style.display = "block"
   let switch_log =document.getElementById("switch-login");
@@ -138,7 +140,7 @@ async function tenCities(){
   for(const name of cities){
     const {lat , lon} = await getLonLat(name);
     const data = await getCities(lat , lon);
-     getCard(data)
+    getCard(data)
 }
 }
 tenCities();
@@ -200,6 +202,7 @@ const allDate ={
 // Create account section
 document.querySelector(".create").addEventListener("click", () => {
   createAccount();
+  progressBar();
 });
 
 const acountT = []; 
@@ -255,3 +258,27 @@ function getMap(latC, lonC) {
   }).addTo(map);
 }
 getMap();
+
+
+
+function progressBar() {
+  document.querySelector(".alert").style.display = "flex"
+  let con = 0;
+  let prog = document.getElementById("prog");
+  const setT = setInterval(() => {
+    con += 1;
+    prog.style.width = con + "%"
+    prog.style.transition = ".8s"
+
+    if (con >= 101) {
+      stopTime();
+      document.querySelector(".alert").style.display = "none"
+    }
+  }, 200);
+
+  function stopTime() {
+    clearInterval(setT);
+  }
+}
+
+
